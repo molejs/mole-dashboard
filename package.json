@@ -1,0 +1,47 @@
+{
+  "name": "mole-dashboard",
+  "version": "0.1.0",
+  "description": "Mole dashboard is a tool to view and explore all your logs stored in a mole server.",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "build": "./node_modules/.bin/webpack --config webpack.config.production.js",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "test:watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/molejs/mole-dashboard.git"
+  },
+  "keywords": [
+    "dashboard",
+    "tool",
+    "error",
+    "reporting",
+    "logs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/molejs/mole-dashboard/issues"
+  },
+  "homepage": "https://github.com/molejs/mole-dashboard",
+  "dependencies": {
+    "es6-promise": "^3.0.2",
+    "isomorphic-fetch": "^2.1.1",
+    "react": "^0.13.3",
+    "react-redux": "^0.9.0",
+    "redux": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-core": "^5.8.22",
+    "babel-loader": "^5.3.2",
+    "jsdom": "<4.0.0",
+    "mocha": "^2.2.5",
+    "mocha-jsdom": "^1.0.0",
+    "react-hot-loader": "^1.2.8",
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  }
+}

@@ -31,7 +31,8 @@ module.exports = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: path.join(__dirname, 'src')
-      }
+      },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
   }
 };

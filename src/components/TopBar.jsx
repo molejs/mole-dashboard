@@ -13,8 +13,6 @@ const TopBar = React.createClass({
           <nav>
             <ul>
               <li className='active'><a href='#/' title='Home'>Home</a></li>
-              <li><a href='#/analytics' title='Analytics'>Analytics</a></li>
-              <li><a href='#/settings' title='Settings'>Settings</a></li>
             </ul>
           </nav>
         </div>

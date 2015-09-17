@@ -1,31 +1,9 @@
-import React from 'react';
+import React from 'react/addons';
 import { connect } from 'react-redux';
 
 import { detailLoad } from '../actions/detail';
 import { fetchSingleLog } from '../apiService';
-import Header from './Header';
-
-const DetailHeader = React.createClass({
-  render() {
-    return (
-      <Header>
-        <span className="mdl-layout-title">{`#${this.props.id}`}</span>
-        <div className="mdl-layout-spacer"></div>
-        <label>{this.props.time}</label>
-      </Header>
-    );
-  }
-});
-
-const Card = React.createClass({
-  render() {
-    return (
-      <div className={`detail-card log mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--${this.props.cols}-col mdl-grid`} onClick={this.onExpand}>
-        {this.props.children}
-      </div>
-    );
-  }
-});
+import Log, { LogStates, LogActions } from './Log';
 
 const LogDetail = React.createClass({
   componentWillMount() {
@@ -33,62 +11,37 @@ const LogDetail = React.createClass({
 
     fetchSingleLog(this.props.params.id).then(data => {
       this.props.dispatch(detailLoad(data.log));
-    }).catch(() => {
+    }).catch(err => {
+      console.error(err)
       alert('An error occurred loading logs!');
     });
   },
 
   render() {
+    let content;
     if (this.props.detail.loading) {
-      return (
+      content = (
         <div className='load-more alone'>
-          <div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />
+          Loading...
+        </div>
+      );
+    } else {
+      content = (
+        <div>
+          <Log log={this.props.detail.data} detail={true} />
+          <div className='log__action-state'>
+            <LogStates states={this.props.detail.data.action_state_history.state} />
+            <LogActions actions={this.props.detail.data.action_state_history.action} />
+          </div>
         </div>
       );
     }
 
-    let stacktrace = (
-      <div className='log__stacktrace'>
-        {this.props.detail.data.error.stacktrace.map(function (line) {
-          return (
-            <pre>
-              {`at ${line['function']} (${line.file}:${line.line}:${line.column})`}
-            </pre>
-          );
-        })}
-      </div>
-    );
-
-    let actions = this.props.detail.data.action_state_history.action.map(function (a) {
-      return (
-        <pre className='action-state'>{JSON.stringify(a)}</pre>
-      );
-    });
-
-    let states = this.props.detail.data.action_state_history.state.map(function (s) {
-      return (
-        <pre className='action-state'>{JSON.stringify(s)}</pre>
-      );
-    });
-
     return (
-      <div className='detail'>
-        <DetailHeader id={this.props.detail.data.id} time={this.props.detail.data.timestamp} />
-        <Card cols={12}>
-          <a className='log__url' href={this.props.detail.data.location.href}>{this.props.detail.data.location.href}</a>
-          <pre className='log__error'>{this.props.detail.data.error.message}</pre>
-          {stacktrace}
-        </Card>
-
-        <Card cols={6}>
-          <h5>Actions</h5>
-          {actions}
-        </Card>
-
-        <Card cols={6}>
-          <h5>States</h5>
-          {states}
-        </Card>
+      <div className='log-detail'>
+        <div className='container'>
+          {content}
+        </div>
       </div>
     );
   }

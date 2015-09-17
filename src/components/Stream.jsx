@@ -1,32 +1,12 @@
-import React from 'react';
+import React from 'react/addons';
 import { connect } from 'react-redux';
 
 import { filter, streamLoad } from '../actions/stream';
 import { fetchLogPage } from '../apiService';
 import Log from './Log';
-import Header from './Header';
+import SearchBar from './SearchBar';
 
-let l = str => str.toLowerCase();
-
-const StreamHeader = React.createClass({
-  render() {
-    return (
-      <Header>
-        <span className="mdl-layout-title">Home</span>
-        <div className="mdl-layout-spacer"></div>
-        <div className="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-          <label className="mdl-button mdl-js-button mdl-button--icon" htmlFor="search">
-            <i className="material-icons">search</i>
-          </label>
-          <div className="mdl-textfield__expandable-holder">
-            <input className="mdl-textfield__input" type="text" id="search" onChange={this.props.onSearch} />
-            <label className="mdl-textfield__label" htmlFor="search">Enter your query...</label>
-          </div>
-        </div>
-      </Header>
-    );
-  }
-});
+const l = str => str.toLowerCase();
 
 const Stream = React.createClass({
   onSearch(e) {
@@ -43,7 +23,7 @@ const Stream = React.createClass({
 
     fetchLogPage(page).then(data => {
       this.props.dispatch(streamLoad(page, data));
-    }).catch(() => {
+    }).catch(err => {
       this.props.dispatch(streamLoad(page, {
         total: this.props.stream.total,
         logs: []
@@ -53,25 +33,23 @@ const Stream = React.createClass({
     });
   },
 
+  filteredLog() {
+    return this.props.stream.logs
+      .filter(log => !this.props.stream.filter
+        || l(log.error.message).indexOf(l(this.props.stream.filter)) >= 0)
+  },
+
   render() {
-    let logs = this.props.stream.logs
-      .filter(log => !this.props.stream.filter || l(log.error.message).indexOf(l(this.props.stream.filter)) >= 0)
-      .map(log => <Log log={log} key={log.id} />);
+    let logs = this.filteredLog()
+      .map(log => <Log log={log} key={log.id} detail={false} />);
+
     return (
       <div className='stream'>
-        <StreamHeader onSearch={this.onSearch} />
-        {logs}
-        {
-          this.props.stream.hasMore
-          ? <div className='load-more'>
-            {
-              this.props.stream.loading
-              ? (<div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />)
-              : (<button onClick={this.loadMore} className='mdl-button mdl-js-button mdl-button--primary'>Load more</button>)
-            }
-            </div>
-          : null
-        }
+        <SearchBar onSearch={this.onSearch} placeholder='Search for logs...' />
+
+        <div className='stream__logs container'>
+          {logs}
+        </div>
       </div>
     );
   }

@@ -1,0 +1,28 @@
+@import '_variables';
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: @roboto;
+  background-color: @body-bg;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 750px;
+}
+
+a {
+  color: @blue-accent;
+  text-decoration: none;
+}
+
+@import '_topbar';
+@import '_stream';
+@import '_search_bar';
+@import '_log';
+@import '_log_detail';

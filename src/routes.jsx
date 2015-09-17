@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react/addons';
 import { Router, Route } from 'react-router';
 import { history } from 'react-router/lib/HashHistory';
 

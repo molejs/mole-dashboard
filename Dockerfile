@@ -1,11 +1,11 @@
 FROM nginx
 COPY . /usr/share/nginx/html
 
-RUN apt-get update &&\
-    apt-get install -y apt-utils &&\
-    apt-get install -y curl &&\
+RUN apt-get update -qq &&\
+    apt-get install -qqy apt-utils &&\
+    apt-get install -qqy curl &&\
     curl --silent --location https://rpm.nodesource.com/setup | bash - &&\
-    apt-get install -y nodejs npm
+    apt-get install -qqy nodejs npm
 
 WORKDIR /usr/share/nginx/html
 

@@ -26,12 +26,13 @@ const LogDetail = React.createClass({
         </div>
       );
     } else {
+      console.log(this.props.detail);
       content = (
         <div>
           <Log log={this.props.detail.data} detail={true} />
           <div className='log__action-state'>
-            <LogStates states={this.props.detail.data.action_state_history.state} />
-            <LogActions actions={this.props.detail.data.action_state_history.action} />
+            <LogStates states={this.props.detail.data.action_state_history.map(h => h.state)} />
+            <LogActions actions={this.props.detail.data.action_state_history.map(h => h.action)} />
           </div>
         </div>
       );

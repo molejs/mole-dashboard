@@ -71,7 +71,7 @@ const LogStates = React.createClass({
     return (
       <div className='states'>
         <h5>States</h5>
-        {states}
+        {states.length > 0 ? states : <p>No states.</p>}
       </div>
     );
   }
@@ -86,7 +86,7 @@ const LogActions = React.createClass({
     return (
       <div className='actions'>
         <h5>Actions</h5>
-        {actions}
+        {actions.length > 0 ? actions : <p>No actions.</p>}
       </div>
     );
   }

@@ -2,7 +2,7 @@ FROM nginx
 COPY . /usr/share/nginx/html
 
 RUN apt-get update &&\
-    apt-get install -y curl &&\
+    apt-get install -y apt-utils curl &&\
     curl --silent --location https://rpm.nodesource.com/setup | bash - &&\
     apt-get install -y nodejs npm
 

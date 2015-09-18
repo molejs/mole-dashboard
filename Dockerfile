@@ -1,6 +1,8 @@
 FROM nginx
 COPY . /usr/share/nginx/html
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update -qq &&\
     apt-get install -qqy apt-utils &&\
     apt-get install -qqy curl &&\

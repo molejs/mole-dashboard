@@ -212,6 +212,89 @@ const logs = {
         }
       }
     ]
+  },
+  '55bb692e19ff303084000003': {
+    id: '55bb692e19ff303084000003',
+    timestamp: new Date().toString(),
+    location: {
+      host: 'fake.molejs.org',
+      href: 'http://fake.molejs.org/app',
+      hash: '',
+      pathname: '/app',
+      port: '',
+      protocol: 'http:',
+      search: ''
+    },
+    error: {
+      message: 'Error: Invariant Violation: setEnabled(...): Cannot toggle event listening in a Worker thread. This is likely a bug in the framework. Please report immediately.',
+      stacktrace: [
+        {
+          'function': 'invariant',
+          file: 'node_modules/react/lib/invariant.js',
+          line: '52',
+          column: '19'
+        },
+        {
+          'function': 'Object.merge.setEnabled',
+          file: 'node_modules/react/lib/ReactEventEmitter.js',
+          line: '206',
+          column: '46'
+        },
+        {
+          'function': 'ReactReconcileTransaction.EVENT_SUPPRESSION.initialize ',
+          file: 'node_modules/react/lib/ReactReconcileTransaction.js',
+          line: '58',
+          column: '23'
+        },
+        {
+          'function': 'ReactReconcileTransaction.Mixin.initializeAll',
+          file: 'node_modules/react/lib/Transaction.js',
+          line: '197',
+          column: '30'
+        }
+      ]
+    },
+    action_state_history: [
+      {
+        action: {
+          type: 'LOGIN_WITH_NSA_FORM',
+          username: 'foo',
+          password: 'sosecret'
+        },
+        state: {
+          loggedIn: false
+        }
+      },
+      {
+        action: {
+          type: 'SEND_BTN',
+          username: 'foo',
+          password: 'sosecret'
+        },
+        state: {
+          loggedIn: false,
+          loginInput: {
+            username: 'foo',
+            password: 'sosecret',
+            sendAddress: 'nsa.secret.secret.net'
+          }
+        }
+      },
+      {
+        action: {
+          type: 'KEEP_PRIVACY'
+        },
+        state: {
+          loggedIn: true,
+          loginInput: {
+            username: 'foo',
+            password: 'sosecret',
+            sendAddress: 'nsa.secret.secret.net'
+          },
+          spied: true
+        }
+      }
+    ]
   }
 };
 

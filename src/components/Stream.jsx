@@ -29,6 +29,8 @@ const Stream = React.createClass({
         logs: []
       }));
 
+      console.error(err);
+
       alert('An error occurred loading logs!');
     });
   },

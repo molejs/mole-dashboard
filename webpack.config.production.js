@@ -4,9 +4,9 @@ var path = require('path');
 module.exports = {
   entry: './src/index',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

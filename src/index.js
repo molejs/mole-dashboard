@@ -4,6 +4,7 @@ require('../node_modules/react-json-inspector/json-inspector.css');
 require('babel/polyfill');
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+require('./fake-data');
 
 import React from 'react/addons';
 import { Provider } from 'react-redux';

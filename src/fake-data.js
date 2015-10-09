@@ -295,6 +295,92 @@ const logs = {
         }
       }
     ]
+  },
+  '55bb692e19ff303084000004': {
+    id: '55bb692e19ff303084000004',
+    timestamp: new Date().toString(),
+    location: {
+      host: 'fake.molejs.org',
+      href: 'http://fake.molejs.org/app',
+      hash: '',
+      pathname: '/app',
+      port: '',
+      protocol: 'http:',
+      search: ''
+    },
+    error: {
+      message: 'TypeError: undefined is not a function',
+      stacktrace: [
+        {
+          'function': 'emit',
+          file: 'events.js',
+          line: '107',
+          column: '17'
+        },
+        {
+          'function': 'EventEmitter.<anonymous>',
+          file: 'index.js',
+          line: '170',
+          column: '9'
+        },
+        {
+          'function': 'EventEmitter.emit',
+          file: 'events.js',
+          line: '107',
+          column: '17'
+        },
+        {
+          'function': 'ClientRequest.<anonymous>',
+          file: 'index.js',
+          line: '50',
+          column: '7'
+        }
+      ]
+    },
+    action_state_history: [
+      {
+        action: {
+          type: 'OPEN_PRODUCT',
+          product: 45,
+        },
+        state: {
+
+        }
+      },
+      {
+        action: {
+          type: 'LOAD_PRODUCT',
+          product: 45
+        },
+        state: {
+          currentProduct: 45
+        }
+      },
+      {
+        action: {
+          type: 'PRODUCT_LOADED'
+        },
+        state: {
+          currentProduct: 45,
+          loading: true,
+        }
+      },
+      {
+        action: {
+          type: 'DISPLAY_PRODUCT'
+        },
+        state: {
+          currentProduct: 45,
+          product: {
+            id: 45,
+            name: 'Foo flowers',
+            image: 'foo_flowers.jpg',
+            price: 34.45
+          },
+          loading: false,
+        }
+      }
+    ]
   }
 };
 

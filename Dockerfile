@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update &&\
     apt-get install -y apt-utils
 RUN apt-get install -y curl &&\
-    curl --silent --location https://rpm.nodesource.com/setup | bash - &&\
+    curl --silent --location https://deb.nodesource.com/setup_4.x | bash - &&\
     apt-get install -y nodejs npm
 
 WORKDIR /usr/share/nginx/html
